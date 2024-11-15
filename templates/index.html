@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métodos Numéricos</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #a9a9a9;
+    color: #ffffff;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    background-color: #1d469f;
+    color: #fff;
+    text-align: center;
+    padding: 0.8rem 1rem;
+    position: relative;
+    width: 100%;
+}
+
+#header h1 {
+    font-size: 2.5rem;
+}
+
+#header p {
+    font-size: 1.2rem;
+}
+
+main {
+    padding: 1rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+section {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: #434141;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+section p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: #555;
+}
+
+ul {
+    list-style-type: disc;
+    margin-left: 2rem;
+}
+
+ul li {
+    margin: 0.5rem 0;
+    cursor: pointer;
+}
+
+ul li:hover {
+    color: #ffe602;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+#footer {
+    background-color: #1d469f;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    bottom: 0;
+    width: 100%;
+}
+
+#footer p {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+#teorias {
+    text-align: left;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #ffff;
+    padding: 1rem;
+}
+    </style>
+</head>
+
+<body>
+
+    <header id="header">
+        <h1>Métodos Numéricos</h1>
+        <p>"A matemática é a arte de transformar complexidade em clareza."</p>
+    </header>
+
+    <main>
+        <!-- Teoria de Erros -->
+        <section>
+            <h2 id="teorias">Teoria de Erros</h2>
+                <ul>
+
+                <li>Arredondamento</li>
+
+                <li>Truncamento</li>
+
+                <li>Notação Científica</li>
+
+                <li>Ponto Flutuante</li>
+
+                <li>Erro Absoluto</li>
+                
+                <li>Erro Relativo</li>
+
+                <li>Erro Percentual</li>
+                
+            </ul>
+        </section>
+
+ 
+
+        <!-- Resolução de Equações Lineares -->
+
+        <section id="equacoes-lineares">
+
+            <h2  id="teorias">Resolução de Equações Lineares</h2>
+
+            <ul>
+
+                <li onclick="redirecionar('Teorema de Bolzano')">Teorema de Bolzano</li>
+
+                <li onclick="redirecionar('Método da Bissecção')">Método da Bissecção</li>
+
+                <li onclick="redirecionar('Método de Newton-Raphson')">Método de Newton-Raphson</li>
+
+                <li onclick="redirecionar('Método da Secante')">Método da Secante</li>
+
+            </ul>
+
+        </section>
+
+ 
+
+        <!-- Resolução de Sistemas Lineares -->
+
+        <section id="sistemas-lineares">
+
+            <h2  id="teorias">Resolução de Sistemas Lineares</h2>
+
+            <ul>
+
+                <li onclick="redirecionar('Eliminação de Gauss')">Eliminação de Gauss</li>
+
+                <li onclick="redirecionar('Metodos iterativos')">Métodos Iterativos</li>
+
+                <li onclick="redirecionar('Método de Gauss-Jacobi')">Método de Gauss-Jacobi</li>
+
+                <li onclick="redirecionar('Método de Gauss-Seidel')">Método de Gauss-Seidel</li>
+
+            </ul>
+
+        </section>
+
+ 
+
+        <!-- Interpolação -->
+
+        <section id="interpolacao">
+
+            <h2  id="teorias">Interpolação</h2>
+
+            <ul>
+
+                <li onclick="redirecionar('Interpolação Lagrange')">Método de Lagrange</li>
+
+                <li onclick="redirecionar('Interpolação Newton-Gregory')">Método de Newton-Gregory</li>
+
+                <li onclick="redirecionar('Interpolação Inversa')">Interpolação Inversa</li>
+
+            </ul>
+
+        </section>
+
+ 
+
+        <!-- Extrapolação -->
+
+        <section id="extrapolacao">
+
+            <h2  id="teorias">Extrapolação </h2>
+            <ul>
+
+                <li onclick="redirecionar('Método dos mínimos quadrados')">Método dos mínimos quadrados</li>
+
+            </ul>
+        </section>
+
+        <!-- Integração -->
+
+        <section id="integração">
+
+            <h2  id="teorias">Integração </h2>
+            <ul>
+
+                <li onclick="redirecionar('Método do Trapezio Composto')">Método do trapezio composto</li>
+
+            </ul>
+        </section>
+
+            <footer id="footer">
+                <p>&copy; Leonardo José de Oliveira Cezar </p>
+            </footer>
+         
+            <script>
+                const subgruposOptions = {
+                
+                };
+                        
+                function redirecionar(args) {
+                    window.location.href = "{{ url_for('funcao') }}?texto=" + args;
+                }
+
+            </script>
+    </main>        
+</body>
