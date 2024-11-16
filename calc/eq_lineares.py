@@ -47,7 +47,6 @@ def newton_raphson_method(func, tolerance=1e-5, max_iterations=1000):
         # Evita divisão por zero na derivada
         if abs(f_prime_x) < tolerance:
             raise Exception("Derivada próxima de zero. O método não convergiu.")
-            return None
 
         # Calcula a próxima aproximação de x
         x_next = x - f_x / f_prime_x
@@ -74,7 +73,6 @@ def secant_method(func, tolerance=1e-5, max_iterations=100):
         # Evita divisão por zero na diferença
         if abs(f_x1 - f_x0) < tolerance:
             raise Exception("Diferença próxima de zero. O método não convergiu.")
-            return None
 
         # Calcula a próxima aproximação de x usando o método da secante
         x_next = x1 - f_x1 * (x1 - x0) / (f_x1 - f_x0)
@@ -87,4 +85,3 @@ def secant_method(func, tolerance=1e-5, max_iterations=100):
         x0, x1 = x1, x_next
 
     raise Exception("O método não convergiu após o número máximo de iterações.")
-    return None
