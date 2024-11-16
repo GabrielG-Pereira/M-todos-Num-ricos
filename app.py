@@ -1,4 +1,5 @@
 import os
+import sys
 import threading
 import webview
 from calc.eq_lineares import *
@@ -8,6 +9,13 @@ from calc.integracao import *
 from calc.extrapolacao import *
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 
+
+if getattr(sys, 'frozen', False):
+    base_path = sys._MEIPASS
+else:
+    base_path = os.path.abspath(".")
+
+app = Flask(__name__, template_folder=os.path.join(base_path, 'templates'), static_folder=os.path.join(base_path, 'static'))
 
 RESULTS_FILE = "results.json"
 
@@ -19,7 +27,6 @@ subgruposOptions = {
     "integracao": ["Método do Trapezio Composto"]
 }
 
-app = Flask(__name__)
 
 functions_map = {
 }
@@ -189,7 +196,6 @@ def escrever_arquivo(texto):
     try:
         with open(caminho_arquivo, 'w', encoding='utf-8') as file:
             file.write(texto)
-        print(f"Texto escrito com sucesso em {caminho_arquivo}")
     except Exception as e:
         print(f"Erro ao escrever no arquivo: {e}")
 

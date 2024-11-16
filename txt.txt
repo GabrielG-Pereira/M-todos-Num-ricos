@@ -1,1 +1,1 @@
-Eliminação de Gauss
+Metodos iterativos
