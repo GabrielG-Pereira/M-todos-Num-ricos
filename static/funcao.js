@@ -164,17 +164,15 @@ function addExpressionField() {
     newField.classList.add('input-group');
     newField.innerHTML = `
         <input type="text" class="exp" name="expression" placeholder="e.g., x^2 * 4 y = 0">
-        <button type="button" onclick="removeExpressionField('${uniqueId}')">-</button>
+        <button type="button" onclick="removeExpressionField(this)">-</button>
     `;
     additionalExpressions.appendChild(newField);
 }
 
 // Função para remover uma div específica
-function removeExpressionField(id) {
-    const field = document.getElementById(id);
-    if (field) {
-        field.remove();
-    }
+function removeExpressionField(button) {
+    const fieldToRemove = button.parentElement;
+    fieldToRemove.remove();
 }
 
 // Função para remover todas as divs criadas

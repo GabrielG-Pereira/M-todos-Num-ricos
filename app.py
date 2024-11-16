@@ -1,3 +1,6 @@
+import os
+import threading
+import webview
 from calc.eq_lineares import *
 from calc.si_lineares import *
 from calc.interpolacao import *
@@ -207,5 +210,17 @@ def identificar_subgrupo(texto):
             return chave
     return None
 
+def start_flask():
+    app.run()
+
 if __name__ == '__main__':
-    app.run(debug=True, port=5003)
+    api = webview.create_window(
+        title='Translater', 
+        url='http://127.0.0.1:5000',
+        min_size=(650, 550) )
+
+    flask_thread = threading.Thread(target=start_flask)
+    flask_thread.start()
+
+    webview.start()
+    os._exit(1)
