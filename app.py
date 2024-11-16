@@ -37,12 +37,34 @@ def index():
 
 @app.route('/funcao')
 def funcao():
+    def escrever_arquivo(texto):
+        try:
+            with open(caminho_arquivo, 'w', encoding='utf-8') as file:
+                file.write(texto)
+        except Exception as e:
+            print(f"Erro ao escrever no arquivo: {e}")
     texto = request.args.get('texto', '')
     escrever_arquivo(texto)
     return render_template('funcao.html')
 
 @app.route('/obter_texto', methods=['GET'])
 def obter_texto():
+    def ler_arquivo():
+        """Lê o conteúdo de um arquivo e retorna como string."""
+        try:
+            with open(caminho_arquivo, 'r', encoding='utf-8') as file:
+                conteudo = file.read()
+            return conteudo
+        except Exception as e:
+            print(f"Erro ao ler o arquivo: {e}")
+            return None
+
+    def identificar_subgrupo(texto):
+        """Identifica a chave em que o texto se encontra dentro de subgruposOptions."""
+        for chave, opcoes in subgruposOptions.items():
+            if texto in opcoes:
+                return chave
+        return None
     texto = ler_arquivo()
     return jsonify({
         "item": texto,
@@ -190,31 +212,6 @@ def string_to_tuple_list(input_string):
     result = [tuple(map(float, pair.strip("() ").split(","))) for pair in pairs]
     
     return result
-
-def escrever_arquivo(texto):
-    """Escreve o texto em um arquivo."""
-    try:
-        with open(caminho_arquivo, 'w', encoding='utf-8') as file:
-            file.write(texto)
-    except Exception as e:
-        print(f"Erro ao escrever no arquivo: {e}")
-
-def ler_arquivo():
-    """Lê o conteúdo de um arquivo e retorna como string."""
-    try:
-        with open(caminho_arquivo, 'r', encoding='utf-8') as file:
-            conteudo = file.read()
-        return conteudo
-    except Exception as e:
-        print(f"Erro ao ler o arquivo: {e}")
-        return None
-    
-def identificar_subgrupo(texto):
-    """Identifica a chave em que o texto se encontra dentro de subgruposOptions."""
-    for chave, opcoes in subgruposOptions.items():
-        if texto in opcoes:
-            return chave
-    return None
 
 def start_flask():
     app.run()
