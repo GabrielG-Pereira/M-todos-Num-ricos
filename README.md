@@ -7,12 +7,12 @@
 ### Teorema de Bolzano
     Exemplo:
     - In - Expressão: x^2 - 1 = 0
-    - Out - Resultado (intervalos): [(-1.1999999999999886, -0.9999999999999887), (0.8000000000000114, 1.0000000000000113)]
+    - Out - Resultado (intervalos): [(-1.2, -1.0), (0.8, 1.0)]
 
 ### Método da Bissecção
     Exemplo:
     - In - Expressão: x^2 - 1 = 0
-    - Out - Resultado (raizes): [-1.0000061035156138, 0.9999938964843863]
+    - Out - Resultado (raizes): [-1.0, 1.0]
 
 ### Método de Newton-Raphson 
     Exemplo:
@@ -22,7 +22,7 @@
 ### Método da Secante
     Exemplo:
     - In - Expressão: x^2 - 1 = 0
-    - Out - Resultado (raizes): [-0.999999999999999, 0.9999999999999988]
+    - Out - Resultado (raizes): [-1.0, 1.0]
 
 ---
 
@@ -30,7 +30,7 @@
 ### Eliminação de Gauss
     Exemplo:
     - In - Expressões: "4*x - y + z = 8", "-x + 3*y - z = -11", "x - y + 5*z = 3"
-    - Out - Resultado: (x1) x: 1.24, (x2) y: -3.36, (x3) z: -0.3199999999999999
+    - Out - Resultado: (x1) x: 1.24, (x2) y: -3.36, (x3) z: -0.31
 
 ### Método de Gauss-Jacobi
     Exemplo:
@@ -40,7 +40,7 @@
 ### Métodos iterativos
     Exemplo:
     - In - Expressões: "4*x - y + z = 8", "-x + 3*y - z = -11", "x - y + 5*z = 3"
-    - Out - Resultado: x: 1.2400000000000002, y: -3.36, z: -0.32
+    - Out - Resultado: x: 1.24, y: -3.36, z: -0.32
 
 ### Método de Gauss-Seidel
     Exemplo:
@@ -74,7 +74,7 @@
 ### Método dos mínimos quadrados
     Exemplo:
     - In - Pontos: (1, 2), (2, 3), (3, 5)
-    - Out - Função: f(x) = 0.5000x^2 + -0.5000x + 2.0000 | Coeficientes: a: 0.49999999999997735, b: -0.4999999999999075, c: 1.9999999999999207
+    - Out - Função: f(x) = 0.5000x^2 + -0.5000x + 2.0000 | Coeficientes: a: 0.5, b: -0.5, c: 2.0
 
 ---
 

@@ -10,7 +10,7 @@ function updateSubgrupos() {
     const grupoSelecionado = document.getElementById('grupos').value;
     const subgruposSelect = document.getElementById('subgrupos');
 
-    subgruposSelect.innerHTML = '<option value="">Clique aqui para selecionar</option>';
+    subgruposSelect.innerHTML = '<option value="">Selecionar</option>';
 
     if (grupoSelecionado && subgruposOptions[grupoSelecionado]) {
         subgruposOptions[grupoSelecionado].forEach(subgrupo => {
@@ -27,6 +27,7 @@ function atualizarCampos() {
     // Obtem o grupo e subgrupo selecionados
     const grupoSelecionado = document.getElementById('grupos').value;
     const subgrupoSelecionado = document.getElementById('subgrupos').value;
+    const subgrupo = document.getElementById('subgrup');
 
     // Elementos a serem manipulados
     const expressao = document.getElementById('expressao');
@@ -34,6 +35,9 @@ function atualizarCampos() {
     const x = document.getElementById('x');
     const y = document.getElementById('y');
     const valor = document.getElementById('valor');
+    const calculate = document.getElementById('calculate');
+    const resultado = document.getElementById('resultado');
+    const botaoExpressao = document.getElementById('botao-expressao');
 
     // Oculta todos os campos inicialmente
     expressao.style.display = 'none';
@@ -41,25 +45,62 @@ function atualizarCampos() {
     x.style.display = 'none';
     y.style.display = 'none';
     valor.style.display = 'none';
+    calculate.style.display = 'none';
+    resultado.style.display = 'none';
 
     // Lógica de visibilidade com base no grupo e subgrupo selecionado
+    if (grupoSelecionado === 'equacoes-lineares'){
+        botaoExpressao.style.display = 'none';
+        removeAllExpressionFields();
+    } else{
+        botaoExpressao.style.display = 'block';
+    }
+
     if (grupoSelecionado === 'equacoes-lineares' || grupoSelecionado === 'sistemas-lineares') {
         expressao.style.display = 'block';
+        calculate.style.display = 'block';
+        resultado.style.display = 'block';
     } else if (subgrupoSelecionado === 'interpolação-lagrange' || subgrupoSelecionado === 'método-dos-mínimos-quadrados') {
         pontos.style.display = 'block';
+        calculate.style.display = 'block';
+        resultado.style.display = 'block';
     } else if (subgrupoSelecionado === 'interpolação-inversa') {
         x.style.display = 'block';
         y.style.display = 'block';
+        calculate.style.display = 'block';
+        resultado.style.display = 'block';
     } else if (subgrupoSelecionado === 'interpolação-newton-gregory') {
         x.style.display = 'block';
         y.style.display = 'block';
         valor.style.display = 'block';
+        calculate.style.display = 'block';
+        resultado.style.display = 'block';
     } else if (grupoSelecionado === 'integracao'){
         expressao.style.display = 'block';
         x.style.display = 'block';
         y.style.display = 'block';
         valor.style.display = 'block';
+        calculate.style.display = 'block';
+        resultado.style.display = 'block';
+    } 
+
+    if(grupoSelecionado === ''){
+        subgrupo.style.display = 'none';
+    } else{
+        subgrupo.style.display = 'block';
     }
+
+    if (subgrupoSelecionado === ''){
+        expressao.style.display = 'none';
+        pontos.style.display = 'none';
+        x.style.display = 'none';
+        y.style.display = 'none';
+        valor.style.display = 'none';
+        calculate.style.display = 'none';
+        resultado.style.display = 'none';
+    }
+    document.getElementById("result").textContent = '';
+    
 }
 
 async function validateAndSendFunction() {
@@ -112,15 +153,35 @@ async function validateAndSendFunction() {
 
 // todas as funções de metodos
 
+let fieldIdCounter = 0; // Contador global para IDs únicos
+
+// Função para adicionar uma nova div com ID único
 function addExpressionField() {
     const additionalExpressions = document.getElementById('additionalExpressions');
     const newField = document.createElement('div');
+    const uniqueId = `expression-field-${fieldIdCounter++}`; // Gera um ID único
+    newField.setAttribute('id', uniqueId); // Atribui o ID à div
     newField.classList.add('input-group');
     newField.innerHTML = `
         <input type="text" class="exp" name="expression" placeholder="e.g., x^2 * 4 y = 0">
-        <button type="button" onclick="removeExpressionField(this)">-</button>
+        <button type="button" onclick="removeExpressionField('${uniqueId}')">-</button>
     `;
     additionalExpressions.appendChild(newField);
+}
+
+// Função para remover uma div específica
+function removeExpressionField(id) {
+    const field = document.getElementById(id);
+    if (field) {
+        field.remove();
+    }
+}
+
+// Função para remover todas as divs criadas
+function removeAllExpressionFields() {
+    const additionalExpressions = document.getElementById('additionalExpressions');
+    additionalExpressions.innerHTML = ''; // Remove todo o conteúdo
+    fieldIdCounter = 0; // Reseta o contador de IDs
 }
 
 function removeExpressionField(button) {

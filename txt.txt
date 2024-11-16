@@ -1,1 +1,1 @@
-Método da Secante
+Eliminação de Gauss
