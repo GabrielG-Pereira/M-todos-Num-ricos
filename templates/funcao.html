@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Execute Mathematical Function</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='funcao.css') }}">
+</head>
+
+<body>
+    <main class="container">
+        <h1>Métodos Matemáticos</h1>
+
+        <form id="functionForm">
+            <div class="form-group" style="display: block">
+                <label for="grupos">Selecione um Grupo:</label>
+                <select id="grupos" onchange="updateSubgrupos()">
+                    <option value="">Clique aqui para selecionar</option>
+                    <option value="equacoes-lineares">Equações Lineares</option>
+                    <option value="sistemas-lineares">Sistemas Lineares</option>
+                    <option value="interpolacao">Interpolação</option>
+                    <option value="extrapolacao">Extrapolação</option>
+                    <option value="integracao">Integração</option>
+                </select>
+            </div>
+
+            <div class="form-group" style="display: block">
+                <label for="subgrupos">Selecione um Subgrupo:</label>
+                <select id="subgrupos" onchange="atualizarCampos()">
+                    <option value="">Clique aqui para selecionar</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="expressao">
+                <label for="expression">Insira a Expressão Matemática:</label>
+                <div class="input-group">
+                    <input type="text" class="exp" name="expression" placeholder="ex: x^2 * 4 y = 0">
+                    <button type="button" onclick="addExpressionField()">+</button>
+                </div>
+                <!-- Container para novos campos de entrada de expressão -->
+                <div id="additionalExpressions"></div>
+            </div>
+
+            <div class="form-group" id="pontos">
+                <label>Pontos:</label>
+                <div class="input-group">
+                    <input type="text" id="pon" name="expression" placeholder="ex: (A e B)">
+                </div>
+            </div>
+
+            <div class="form-group" id="x">
+                <label>Valor de X | A:</label>
+                <div class="input-group">
+                    <input type="text" id="xp" name="expression" placeholder="ex: X = 7">
+                </div>
+            </div>
+
+            <div class="form-group" id="y">
+                <label>Valor de Y | B:</label>
+                <div class="input-group">
+                    <input type="text" id="yp" name="expression" placeholder="ex: Y = 5">
+                </div>
+            </div>
+
+            <div class="form-group" id="valor">
+                <label>Valor da Interpolação | Extrapolação | Integração:</label>
+                <div class="input-group">
+                    <input type="text" id="val" name="expression" placeholder="ex: 1.2; 2.3; 5.0">
+                </div>
+            </div>
+
+
+            <button type="button" onclick="validateAndSendFunction()">Debugar a função</button>
+        </form>
+
+        <section>
+            <h2>Resultado:</h2>
+            <pre id="result"></pre>
+        </section>
+    </main>
+
+    <script src="../static/funcao.js"></script>
+    <script>
+        window.onload = function() {
+            // Recupera o método selecionado do sessionStorage
+            const method = sessionStorage.getItem("selectedMethod");
+
+            if (method) {
+                // Exibe o método no elemento de resultado (modifique conforme o ID do elemento onde quer exibir)
+                document.getElementById("result").textContent = `Método selecionado: ${method}`;
+            }
+
+            buscarTexto()
+        };
+    </script>
+
+</body>
+
+</html>
