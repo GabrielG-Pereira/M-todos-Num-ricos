@@ -45,12 +45,12 @@ function atualizarCampos() {
     // Lógica de visibilidade com base no grupo e subgrupo selecionado
     if (grupoSelecionado === 'equacoes-lineares' || grupoSelecionado === 'sistemas-lineares') {
         expressao.style.display = 'block';
-    } else if (subgrupoSelecionado === 'interpolação-lagrange') {
+    } else if (subgrupoSelecionado === 'interpolação-lagrange' || subgrupoSelecionado === 'método-dos-mínimos-quadrados') {
         pontos.style.display = 'block';
     } else if (subgrupoSelecionado === 'interpolação-inversa') {
         x.style.display = 'block';
         y.style.display = 'block';
-    } else if (subgrupoSelecionado === 'interpolação-newton-gregory' || subgrupoSelecionado === 'método-dos-mínimos-quadrados') {
+    } else if (subgrupoSelecionado === 'interpolação-newton-gregory') {
         x.style.display = 'block';
         y.style.display = 'block';
         valor.style.display = 'block';
@@ -84,6 +84,7 @@ async function validateAndSendFunction() {
     };
 
     try {
+        document.getElementById("result").textContent = "Calculando...";
         // Envia a requisição POST para o servidor
         const response = await fetch('/processar_dados', {
             method: 'POST',

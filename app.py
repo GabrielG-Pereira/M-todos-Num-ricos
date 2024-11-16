@@ -55,18 +55,16 @@ def processar_dados():
             y = [float(num.strip()) if '.' in num else int(num.strip()) for num in  dados.get('y').split(",")]
             valor = float(dados.get('valor'))
         except:
-            pass
-        
-        
+            pass   
 
         if subgrupo == "teorema-de-bolzano":
-            return jsonify({"result" : bolzano_theorem(expressao[0])})
+            return jsonify({"result" : str(bolzano_theorem(expressao[0], variaveis))})
         elif subgrupo == "método-da-bissecção":
-            return jsonify({"result" : bisection_method(expressao[0])})
+            return jsonify({"result" : str(bisection_method(expressao[0], variaveis))})
         elif subgrupo == "método-de-newton-raphson":
-            return jsonify({"result" : newton_raphson_method(expressao[0])})
+            return jsonify({"result" : str(newton_raphson_method(expressao[0], variaveis))})
         elif subgrupo == "método-da-secante":
-            return jsonify({"result" : secant_method(expressao[0])})
+            return jsonify({"result" : str(secant_method(expressao[0], variaveis))})
         
 
         elif subgrupo == "eliminação-de-gauss":
@@ -94,15 +92,18 @@ def processar_dados():
             return jsonify({"result" : newton_gregory_forward(x, y, valor)})
         elif subgrupo == "interpolação-inversa":
             linear_func, a, b = least_squares_linear(x, y)
-            print(f"Equação da linha de ajuste: y = {a:.2f} + {b:.2f}x")
-            return jsonify({"result" : f"y = {a:f} + {b:f}x"})
+            return jsonify({"result" : f"Função: y = {a:f} + {b:f}x"})
 
 
         elif subgrupo == "método-dos-mínimos-quadrados":
-            return jsonify({"result" : least_squares_linear_extrapolation(x, y, valor)})
+            print(pontos)
+            result = least_squares_quadratic_extrapolation(string_to_tuple_list(pontos))
+            resultado_formatado = ", ".join(f"{var}: {float(valor)}" for var, valor in result["coefficients"].items())
+            return jsonify({"result" : f"Função: {result["formula"]}\nCoeficientes: {resultado_formatado}"})
         
         elif subgrupo == "método-do-trapezio-composto":
             return jsonify({"result" : str(compound_trace_method(expressao[0], x[0], y[0], int(valor)))})
+        return jsonify({"result" :"Selecione um método!"})
 
     except Exception as e:
         return jsonify({"result": str(e)})

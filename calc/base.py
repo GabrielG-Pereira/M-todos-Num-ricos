@@ -42,15 +42,32 @@ def derive_lambda_function(lambda_func):
 
     return derivative_func, derivative_sympy
 
-def find_initial_guesses(lambda_func, start=-100, end=100, num_intervals=1000):
+def find_initial_guesses(lambda_func, start=-100, end=100, num_intervals=1000, tolerance=1e-5):
     interval_length = (end - start) / num_intervals
+    points = []
+    visited_roots = []
+
     for i in range(num_intervals):
         a = start + i * interval_length
         b = a + interval_length
-        if lambda_func(a) * lambda_func(b) < 0:
-            # Retorna os pontos a e b onde há uma mudança de sinal, sugerindo uma raiz
-            return a, b
-    raise Exception("Não foi possível encontrar valores iniciais usando o teorema de Bolzano.")
+
+        try:
+            # Verifica se há mudança de sinal
+            if lambda_func(a) * lambda_func(b) < 0:
+                midpoint = (a + b) / 2
+
+                # Verifica se o ponto médio já está próximo de uma raiz encontrada
+                if all(abs(midpoint - root) > tolerance for root in visited_roots):
+                    points.append((a, b))
+                    visited_roots.append(midpoint)
+        except (ValueError, OverflowError):
+            # Ignora erros na avaliação da função
+            continue
+
+    if not points:
+        raise Exception("Não foi possível encontrar intervalos com mudança de sinal.")
+
+    return points
 
 def derive_jacobian_matrix(functions, variables):
     symbols = sp.symbols(variables)

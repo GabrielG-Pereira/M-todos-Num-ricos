@@ -1,1 +1,1 @@
-Interpolação Lagrange
+Método da Secante
