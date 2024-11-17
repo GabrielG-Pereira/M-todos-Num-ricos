@@ -1,1 +1,1 @@
-Metodos iterativos
+Método da Bissecção
