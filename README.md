@@ -62,7 +62,7 @@ Cada seção inclui exemplos detalhados de entrada e saída para facilitar a com
     x - y + 5*z = 3
     ```
 - **Saída**:  
-  - (x1) `x: 1.24`, (x2) `y: -3.36`, (x3) `z: -0.31`
+  - (x1) `x: 1.24`, (x2) `y: -3.36`, (x3) `z: -0.32`
 
 ---
 
@@ -101,7 +101,7 @@ Cada seção inclui exemplos detalhados de entrada e saída para facilitar a com
     x - y + 5*z = 3
     ```
 - **Saída**:  
-  - `x: 1.2400001187917953`, `y: -3.3599997423557526`, `z: -0.31999997222950965`
+  - `x: 1.2400001187917953`, `y: -3.3599997423557526`, `z: -0.32`
 
 ---
 

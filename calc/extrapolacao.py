@@ -33,8 +33,11 @@ def least_squares_quadratic_extrapolation(points):
         return a * x**2 + b * x + c
     
     # Retornar os resultados
-    return {
+    result = {
         "formula": f"f(x) = {a:.4f}x^2 + {b:.4f}x + {c:.4f}",
         "coefficients": {"a": a, "b": b, "c": c},
         "function": quadratic_function
     }
+
+    resultado_formatado = ", ".join(f"{var}: {float(valor)}" for var, valor in result["coefficients"].items())
+    return f"Função: {result['formula']}\nCoeficientes: {resultado_formatado}"

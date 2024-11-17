@@ -10,13 +10,15 @@
 
 <body>
     <main class="container">
-        <h1>Métodos Matemáticos</h1>
+        <h1 id="metodo" style="display: none;">{{item}}</h1>
+        <h1 id="grupo" style="display: none;">{{grup}}</h1>
+        <h1>Métodos Numéricos</h1>
 
         <form id="functionForm">
             <div class="form-group" style="display: block">
-                <label for="grupos">Selecione um Grupo:</label>
+                <label for="grupos">Selecione uma categoria:</label>
                 <select id="grupos" onchange="updateSubgrupos()">
-                    <option value="">Clique aqui para selecionar</option>
+                    <option value="" disabled selected>Clique aqui para selecionar</option>
                     <option value="equacoes-lineares">Equações Lineares</option>
                     <option value="sistemas-lineares">Sistemas Lineares</option>
                     <option value="interpolacao">Interpolação</option>
@@ -26,9 +28,9 @@
             </div>
 
             <div class="form-group" id="subgrup">
-                <label for="subgrupos">Selecione um Subgrupo:</label>
+                <label for="subgrupos">Selecione um algoritmo:</label>
                 <select id="subgrupos" onchange="atualizarCampos()">
-                    <option value="">Clique aqui para selecionar</option>
+                    <option value="" disabled selected>Clique aqui para selecionar</option>
                 </select>
             </div>
 
@@ -64,7 +66,7 @@
             </div>
 
             <div class="form-group" id="valor">
-                <label>Valor da Interpolação | Extrapolação | Integração:</label>
+                <label>Valor:</label>
                 <div class="input-group">
                     <input type="text" id="val" name="expression" placeholder="ex: 1.2; 2.3; 5.0">
                 </div>
@@ -73,26 +75,22 @@
             <div id="calculate">
                 <button type="button" onclick="validateAndSendFunction()">Debugar a função</button>
             </div>
+
         </form>
 
         <section>
             <h2  id="resultado">Resultado:</h2>
             <pre id="result"></pre>
         </section>
+
     </main>
 
     <script src="../static/funcao.js"></script>
     <script>
         window.onload = function() {
-            // Recupera o método selecionado do sessionStorage
-            const method = sessionStorage.getItem("selectedMethod");
-
-            if (method) {
-                // Exibe o método no elemento de resultado (modifique conforme o ID do elemento onde quer exibir)
-                document.getElementById("result").textContent = `Método selecionado: ${method}`;
-            }
-
-            buscarTexto()
+            const metodo = document.getElementById("metodo").textContent;
+            const grupo = document.getElementById("grupo").textContent;
+            buscarTexto(metodo, grupo)
         };
     </script>
 

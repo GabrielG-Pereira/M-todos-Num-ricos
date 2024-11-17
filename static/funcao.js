@@ -187,38 +187,16 @@ function removeExpressionField(button) {
     fieldToRemove.remove();
 }
 
-async function buscarTexto() {
-    try {
-        // Realiza a requisição GET para a rota '/obter_texto'
-        const response = await fetch('/obter_texto');
-
-        // Verifica se a resposta é bem-sucedida
-        if (!response.ok) {
-            throw new Error('Erro ao buscar o texto');
+async function buscarTexto(metodo, grupo) {
+    document.getElementById('grupos').value = grupo;
+    updateSubgrupos();
+    const subgruposSelect = document.getElementById('subgrupos');
+    const subgrupoValue = metodo.toLowerCase().replace(/\s+/g, '-');
+    for (const option of subgruposSelect.options) {
+        if (option.value === subgrupoValue) {
+            option.selected = true;
+            break;
         }
-
-        // Converte a resposta para JSON
-        const data = await response.json();
-
-        // Atualiza o elemento 'grupos' com o grupo retornado
-        document.getElementById('grupos').value = data.grup;
-
-        // Chama a função para atualizar os subgrupos com base no grupo selecionado
-        updateSubgrupos();
-
-        // Seleciona o subgrupo específico no 'subgrupos'
-        const subgruposSelect = document.getElementById('subgrupos');
-        const subgrupoValue = data.item.toLowerCase().replace(/\s+/g, '-');
-        for (const option of subgruposSelect.options) {
-            if (option.value === subgrupoValue) {
-                option.selected = true;
-                break;
-            }
-        }
-        atualizarCampos()
-
-        // Exibe um alerta com o grupo e subgrupo selecionados (opcional)
-    } catch (error) {
-        alert('Erro: ' + error);
     }
+    atualizarCampos()
 }

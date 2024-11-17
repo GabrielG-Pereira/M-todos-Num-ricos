@@ -34,7 +34,7 @@ def newton_method_system(funcs, variables, initial_guess=None, tolerance=1e-5, m
         # Verifica a convergência
         if np.linalg.norm(delta, ord=np.inf) < tolerance:
             print(f"Convergiu em {iteration + 1} iterações.")
-            return dict(zip(variables, x))
+            return str(", ".join(f"{var}: {float(valor)}" for var, valor in dict(zip(variables, x)).items()))
 
     raise Exception("O método não convergiu após o número máximo de iterações.")
 
@@ -88,7 +88,7 @@ def gauss_elimination_from_expressions(expressions, variables):
     for i in range(n - 1, -1, -1):
         x[i] = (b[i] - np.dot(A[i, i + 1:], x[i + 1:])) / A[i, i]
 
-    return dict(zip(variables, x))
+    return str(", ".join(f"{var}: {float(valor)}" for var, valor in dict(zip(variables, x)).items()))
 
 def gauss_jacobi_from_expressions(equations, variables, tolerance=1e-5, max_iterations=100):
     # Define os símbolos para as variáveis
@@ -132,7 +132,8 @@ def gauss_jacobi_from_expressions(equations, variables, tolerance=1e-5, max_iter
         # Verifica a convergência com base na norma das diferenças
         if np.linalg.norm(x_new - x, ord=np.inf) < tolerance:
             print(f"Convergiu em {iteration + 1} iterações.")
-            return dict(zip(variables, x_new))
+            return str(", ".join(f"{var}: {float(valor)}" for var, valor in dict(zip(variables, x_new)).items()))
+
 
         # Atualiza x para a próxima iteração
         x = x_new.copy()
@@ -182,6 +183,6 @@ def gauss_seidel_from_expressions(equations, variables, tolerance=1e-5, max_iter
         # Verifica a convergência com base na norma das diferenças
         if np.linalg.norm(x - x_old, ord=np.inf) < tolerance:
             print(f"Convergiu em {iteration + 1} iterações.")
-            return dict(zip(variables, x))
+            return str(", ".join(f"{var}: {float(valor)}" for var, valor in dict(zip(variables, x)).items()))
 
     raise Exception("O método não convergiu após o número máximo de iterações.")
